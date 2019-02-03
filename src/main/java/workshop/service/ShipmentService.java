@@ -27,12 +27,14 @@ public class ShipmentService {
         shipmentCreators.put(2, ShipmentFactory.NULL_SHIPMENT::create);
     }
 
-    public Shipment getShipment() {
-        return randomizeCreation();
+    public Shipment getShipment(Long id) {
+        Shipment shipment = randomizeCreation();
+        if (shipment != null) shipment.setId(id);
+        return shipment;
     }
 
     private Shipment randomizeCreation() {
         Random random = new Random();
-        return shipmentCreators.get(random.nextInt(2)).get();
+        return shipmentCreators.get(random.nextInt(3)).get();
     }
 }
